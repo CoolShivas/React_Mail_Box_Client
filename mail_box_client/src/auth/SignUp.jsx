@@ -1,17 +1,46 @@
+import axios from "axios";
 import styles from "./SignUp.module.css";
 
 const SignUp = () => {
 
-    const handlerOnSubmitForm = (e) => {
-        e.preventDefault();
+    const handlerOnSubmitForm = async (e) => {
+        try {
+            e.preventDefault();
 
-        const signUpData = {
-            Email: e.target.email.value,
-            Password: e.target.pass.value,
-            ConfirmPassword: e.target.confirmpass.value,
-        };
+            const signUpData = {
+                Email: e.target.email.value,
+                Password: e.target.pass.value,
+                ConfirmPassword: e.target.confirmpass.value,
+            };
 
-        console.log(signUpData);
+            console.log(signUpData);
+
+
+            if (signUpData.pass !== signUpData.confirmPass) {
+                console.log("Password not matched");
+                return; // Exit the function if passwords don't match
+            }
+
+            const response = await axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=
+            AIzaSyCQcA5REjOt31zhMdN654yDzlfkUKNT8CA`, {
+                email: signUpData.Email,
+                password: signUpData.Password,
+                returnSecureToken: true
+            })
+
+            console.log('Response:', response.data)
+            console.log("SignUp Successfully");
+            alert("SignUp Successfully. Please, Login now.");
+
+
+        } catch (error) {
+            alert(error, "Something went wrong");
+        }
+
+
+        e.target.email.value = "";
+        e.target.pass.value = "";
+        e.target.confirmpass.value = "";
     };
 
     return (
