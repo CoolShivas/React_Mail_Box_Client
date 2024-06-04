@@ -1,0 +1,42 @@
+.signup_div {
+  background-color: orange;
+  width: 50%;
+  margin: 5rem auto;
+  font-size: 15px;
+  padding: 2rem;
+  font-weight: bold;
+
+  && .heading {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  && input {
+    width: 100%;
+  }
+}
+
+.actions_signup__btn {
+  font-size: 15px;
+  font-weight: 500;
+
+  && button {
+    width: 100%;
+    border: none;
+    padding: 0.3rem;
+    background-color: red;
+    color: white;
+
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+  }
+
+  && button:hover {
+    font-size: 25px;
+    color: black;
+    background-color: greenyellow;
+  }
+}
