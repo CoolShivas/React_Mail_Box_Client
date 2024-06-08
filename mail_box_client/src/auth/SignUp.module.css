@@ -40,3 +40,28 @@
     background-color: greenyellow;
   }
 }
+
+.actions_have_account__btn {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 10px;
+
+  && button {
+    width: 100%;
+    border: none;
+    padding: 0.3rem;
+    background-color: yellow;
+
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+  }
+
+  && button:hover {
+    font-size: 25px;
+    color: white;
+    background-color: blue;
+  }
+}

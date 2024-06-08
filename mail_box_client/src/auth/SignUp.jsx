@@ -44,42 +44,51 @@ const SignUp = () => {
     };
 
     return (
-        <form className={styles.signup_div} onSubmit={handlerOnSubmitForm}>
-            <div className={styles.heading}>
-                <h1> Sign Up </h1>
-            </div>
-            <div className="mb-3 row">
-                <label htmlFor="staticEmail" className="col-sm-2 col-htmlForm-label">
-                    Email
-                </label>
-
-                <div className="col-sm-10">
-                    <input type="email" className="form-control" id="email" required />
+        <>
+            <form className={styles.signup_div} onSubmit={handlerOnSubmitForm}>
+                <div className={styles.heading}>
+                    <h1> Sign Up </h1>
                 </div>
-            </div>
+                <div className="mb-3 row">
+                    <label htmlFor="staticEmail" className="col-sm-2 col-htmlForm-label">
+                        Email
+                    </label>
 
-            <div className="mb-3 row">
-                <label htmlFor="inputPassword" className="col-sm-2 col-htmlForm-label">
-                    Password
-                </label>
-                <div className="col-sm-10">
-                    <input type="password" className="form-control" id="pass" minLength={6} required />
+                    <div className="col-sm-10">
+                        <input type="email" className="form-control" id="email" required />
+                    </div>
                 </div>
-            </div>
 
-            <div className="mb-3 row">
-                <label htmlFor="inputPassword" className="col-sm-2 col-htmlForm-label">
-                    Confirm Password
-                </label>
-                <div className="col-sm-10">
-                    <input type="password" className="form-control" id="confirmpass" minLength={6} required />
+                <div className="mb-3 row">
+                    <label htmlFor="inputPassword" className="col-sm-2 col-htmlForm-label">
+                        Password
+                    </label>
+                    <div className="col-sm-10">
+                        <input type="password" className="form-control" id="pass" minLength={6} required />
+                    </div>
                 </div>
-            </div>
 
-            <div className={styles.actions_signup__btn}>
-                <button type="submit"> Submit </button>
-            </div>
-        </form>
+                <div className="mb-3 row">
+                    <label htmlFor="inputPassword" className="col-sm-2 col-htmlForm-label">
+                        Confirm Password
+                    </label>
+                    <div className="col-sm-10">
+                        <input type="password" className="form-control" id="confirmpass" minLength={6} required />
+                    </div>
+                </div>
+
+                <div className={styles.actions_signup__btn}>
+                    <button type="submit"> Sign Up </button>
+                </div>
+
+                <div className={styles.actions_have_account__btn}>
+                    <button className={styles.have_account}> Have an account? Login </button>
+                </div>
+
+
+
+            </form>
+        </>
     );
 };
 
