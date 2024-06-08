@@ -32,10 +32,18 @@ const SignIn = () => {
 
             console.log('Response:', response.data)
             console.log("SignIn Successfully");
-            dispatch(authActions.login(response.data.idToken));
+            // dispatch(authActions.login(response.data.idToken));
+            dispatch(authActions.login({
+                token: response.data.idToken,
+                userId: response.data.email
+            }));
             alert("SignIn Successfully.");
             localStorage.setItem("Save Token", response.data.idToken);
             navigate.replace("/welcome");
+
+            const cleanEmail = response.data.email.replace(/[@.]/g, "")
+            localStorage.setItem("cleanEmail", JSON.stringify(cleanEmail));
+            console.log(cleanEmail);
 
 
 

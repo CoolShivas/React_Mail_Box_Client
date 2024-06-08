@@ -16,6 +16,8 @@ const Navbar = () => {
         dispatch(authActions.logout());
         localStorage.removeItem("Save Token");
         navigate.replace("/signup");
+        localStorage.removeItem("Save Token")
+        localStorage.removeItem("cleanEmail");
     };
 
     return (
