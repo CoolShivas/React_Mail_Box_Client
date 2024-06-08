@@ -1,10 +1,12 @@
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import styles from "./SignUp.module.css";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store";
 
 const SignIn = () => {
+
+    const navigate = useHistory();
 
     const dispatch = useDispatch();
 
@@ -30,9 +32,11 @@ const SignIn = () => {
 
             console.log('Response:', response.data)
             console.log("SignIn Successfully");
-            dispatch(authActions.login("/welcome"));
+            dispatch(authActions.login(response.data.idToken));
             alert("SignIn Successfully.");
             localStorage.setItem("Save Token", response.data.idToken);
+            navigate.replace("/welcome");
+
 
 
         } catch (error) {
