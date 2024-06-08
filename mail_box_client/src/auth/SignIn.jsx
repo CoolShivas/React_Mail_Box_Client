@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import styles from "./SignUp.module.css";
+import { useDispatch } from "react-redux";
+import { authActions } from "../store";
 
 const SignIn = () => {
+
+    const dispatch = useDispatch();
 
     const handlerOnSubmitForm = async (e) => {
         try {
@@ -25,8 +29,10 @@ const SignIn = () => {
             })
 
             console.log('Response:', response.data)
-            console.log("SignUp Successfully");
+            console.log("SignIn Successfully");
+            dispatch(authActions.login("/welcome"));
             alert("SignIn Successfully.");
+            localStorage.setItem("Save Token", response.data.idToken);
 
 
         } catch (error) {

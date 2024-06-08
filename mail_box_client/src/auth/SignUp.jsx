@@ -1,9 +1,12 @@
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import styles from "./SignUp.module.css";
+import { useDispatch } from "react-redux";
 
 
 const SignUp = () => {
+
+    const dispatch = useDispatch();
 
     const navigate = useHistory();
 
@@ -36,6 +39,7 @@ const SignUp = () => {
             console.log("SignUp Successfully");
             alert("SignUp Successfully. Please, Login now.");
             navigate.replace("/signin");
+
 
         } catch (error) {
             alert(error, "Something went wrong");
