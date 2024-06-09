@@ -1,9 +1,15 @@
+import JoditEditor from "jodit-react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import styles from "./CreateMail.module.css";
+import { useRef, useState } from "react";
 
 
 
 const CreateMail = () => {
+
+    const editor = useRef(null);
+
+    const [content, setContent] = useState('');
 
     const navigate = useHistory();
 
@@ -34,7 +40,14 @@ const CreateMail = () => {
                             </div>
 
                             <div className={styles.emailto}>
-                                <textarea name="text" id="text" rows={10} cols={20} placeholder="This is a text box"></textarea>
+                                {/* <textarea name="text" id="text" rows={10} cols={20} placeholder="This is a text box"></textarea> */}
+
+                                <JoditEditor
+                                    ref={editor}
+                                    value={content}
+                                    onChange={newContent => setContent(newContent)}
+                                ></JoditEditor>
+
                             </div>
                         </div>
                         <div className={styles.mail_send__btn}>
