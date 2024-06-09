@@ -1,0 +1,30 @@
+.create_mail__container {
+  border: 1px solid red;
+  margin: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.header_right {
+  float: right;
+  margin: 5px;
+  && button:hover {
+    background-color: tomato;
+    border: none;
+    color: white;
+  }
+}
+
+.header_left {
+  && input {
+    width: 100%;
+  }
+
+  && textarea {
+    width: 100%;
+  }
+}
+
+.emailto {
+  padding: 1rem;
+  border-bottom: 1px solid black;
+  margin: 0 5px;
+}

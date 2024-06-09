@@ -1,3 +1,4 @@
+import CreateMail from "../pages/CreateMail";
 import Header from "./Header";
 import WelComePage from "../pages/WelComePage";
 import SignIn from "../auth/SignIn";
@@ -16,6 +17,8 @@ const MyRouter = () => {
             {isAuthenticated && <>
 
                 <Route path="/welcome"> <WelComePage></WelComePage> </Route>
+                <Route path="/mail"> <CreateMail></CreateMail> </Route>
+
             </>}
 
             {!isAuthenticated && <>
