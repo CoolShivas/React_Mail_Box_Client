@@ -17,7 +17,7 @@ const CreateMail = () => {
                         <div className={styles.header_left}>
                             <div className={styles.emailto}>
 
-                                <input type="email" placeholder="to :" />
+                                <input type="email" placeholder="To :" />
 
                             </div>
 
@@ -26,10 +26,12 @@ const CreateMail = () => {
                             </div>
 
                             <div className={styles.emailto}>
-                                <textarea name="text" id="text" rows={5} cols={20} placeholder="This is a text box"></textarea>
+                                <textarea name="text" id="text" rows={10} cols={20} placeholder="This is a text box"></textarea>
                             </div>
                         </div>
-
+                        <div className={styles.mail_send__btn}>
+                            <button className="btn btn-info"> Send </button>
+                        </div>
 
                     </div>
                 </div>
