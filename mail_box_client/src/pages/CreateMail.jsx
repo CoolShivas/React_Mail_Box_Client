@@ -36,25 +36,39 @@ const CreateMail = () => {
         })
     };
 
-    const handlerOnMailFormSubmit = (e) => {
+    const handlerOnMailFormSubmit = async (e) => {
         e.preventDefault();
         console.log(post);
 
-        if (post.receiver.trim() === "") {
-            alert("Email is required");
-            return;
-        }
+        try {
+            if (post.receiver.trim() === "") {
+                alert("Email is required");
+                return;
+            }
 
-        if (post.subject.trim() === "") {
-            alert("Text Mail is required");
-            return;
-        }
+            if (post.subject.trim() === "") {
+                alert("Text Mail is required");
+                return;
+            }
 
-        if (post.content.trim() === "") {
-            alert("Content message is required");
-            return;
-        }
+            if (post.content.trim() === "") {
+                alert("Content message is required");
+                return;
+            }
 
+            const res = await fetch('https://mailboxclient-88eb9-default-rtdb.firebaseio.com/shivemail.json', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(post),
+            })
+            console.log('Sent Successfully', res);
+
+        } catch (error) {
+            console.log(error);
+            alert("Something went wrong to send the mail");
+        }
 
     };
 
@@ -62,7 +76,7 @@ const CreateMail = () => {
         <form onSubmit={handlerOnMailFormSubmit}>
             <div className={styles.create_mail__container}>
                 <div className="create_mail__div">
-                    {JSON.stringify(post)}
+                    {/* {JSON.stringify(post)} */}
                     <div className={styles.header_right}>
                         <button onClick={handlerOnCancelBtn}> X </button>
                     </div>
