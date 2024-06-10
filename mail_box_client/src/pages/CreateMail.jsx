@@ -9,76 +9,11 @@ import { useRef, useState } from "react";
 
 const CreateMail = () => {
 
-    // const editor = useRef(null);
-
-    // const [content, setContent] = useState('');
-
     const navigate = useHistory();
 
     const handlerOnCancelBtn = () => {
         navigate.push("/welcome");
     };
-
-
-    // const [post, setPost] = useState({
-    //     receiver: '',
-    //     subject: '',
-    // });
-
-    // const fieldChangeHandler = (e) => {
-    //     setPost({
-    //         ...post, [e.target.id]: e.target.value
-    //     })
-    // };
-
-    // const contentFieldHandler = (data) => {
-    //     setPost({
-    //         ...post,
-    //         "content": data
-    //     })
-    // };
-
-    // const handlerOnMailFormSubmit = async (e) => {
-    //     e.preventDefault();
-    //     console.log(post);
-
-    // try {
-    //     if (post.receiver.trim() === "") {
-    //         alert("Email is required");
-    //         return;
-    //     }
-
-    //     if (post.subject.trim() === "") {
-    //         alert("Text Mail is required");
-    //         return;
-    //     }
-
-    //     if (post.content.trim() === "") {
-    //         alert("Content message is required");
-    //         return;
-    //     }
-
-    //     const cleanEmail = localStorage.getItem("cleanEmail");
-    //     const newCleanEmail = post.receiver.replace(/[@.]/g, "")
-    //     console.log(newCleanEmail);
-
-    //     const res = await fetch(`https://mailboxclient-88eb9-default-rtdb.firebaseio.com/shivemail/${cleanEmail}/${newCleanEmail}.json`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(post),
-    //     })
-    //     console.log('Sent Successfully', res);
-
-    // } catch (error) {
-    //     console.log(error);
-    //     alert("Something went wrong to send the mail");
-    // }
-    // };
-
-
-    // Once again started using the rich editor with the help of ReactQuill whereas above one was completed with the help of JoditEditor ;
 
 
     const [sendEmail, setSendEmail] = useState("");
@@ -104,12 +39,12 @@ const CreateMail = () => {
                 contentBox: contentBox,
             };
 
-            console.log(sendEmailDetails);
+            // console.log(sendEmailDetails);
 
             const senderEmail = localStorage.getItem("cleanEmail");
-            console.log(senderEmail);
+            // console.log(senderEmail);
             const reciverCleanEmail = JSON.stringify(sendEmail.replace(/[@.]/g, ""));
-            console.log(reciverCleanEmail);
+            // console.log(reciverCleanEmail);
 
             const response = await fetch(`https://mailboxclient-88eb9-default-rtdb.firebaseio.com/shivaEmail/${senderEmail}/${reciverCleanEmail}.json`, {
                 method: "POST",
@@ -127,7 +62,9 @@ const CreateMail = () => {
             alert("Something went wrong to send the mail");
         }
 
-
+        setSendEmail("");
+        setSubjectMatter("");
+        setContentBox("");
 
     };
 
