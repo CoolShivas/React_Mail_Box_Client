@@ -1,13 +1,17 @@
+import { mailActions } from "../store";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 // import JoditEditor from "jodit-react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import styles from "./CreateMail.module.css";
 import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
 
 
 const CreateMail = () => {
+
+    const dispatch = useDispatch();
 
     const navigate = useHistory();
 
@@ -32,27 +36,56 @@ const CreateMail = () => {
     const handlerOnMailFormSubmit = async (e) => {
         e.preventDefault();
 
+        const sendEmailDetails = {
+            sendEmail: sendEmail,
+            subjectMatter: subjectMatter,
+            contentBox: contentBox,
+        };
+
+        // console.log(sendEmailDetails);
+
+        const senderEmail = localStorage.getItem("cleanEmail");
+        // console.log(senderEmail);
+        const reciverCleanEmail = JSON.stringify(sendEmail.replace(/[@.]/g, ""));
+        // console.log(reciverCleanEmail);
+
         try {
-            const sendEmailDetails = {
-                sendEmail: sendEmail,
-                subjectMatter: subjectMatter,
-                contentBox: contentBox,
-            };
 
-            // console.log(sendEmailDetails);
-
-            const senderEmail = localStorage.getItem("cleanEmail");
-            // console.log(senderEmail);
-            const reciverCleanEmail = JSON.stringify(sendEmail.replace(/[@.]/g, ""));
-            // console.log(reciverCleanEmail);
-
-            const response = await fetch(`https://mailboxclient-88eb9-default-rtdb.firebaseio.com/shivaEmail/${senderEmail}/${reciverCleanEmail}.json`, {
+            const response = await fetch(`https://mailboxclient-88eb9-default-rtdb.firebaseio.com/dualEmail/${senderEmail}/sendBox.json`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(sendEmailDetails),
             })
+
+            if (!response.ok) {
+                const errMsg = await response.json();
+                throw new Error("Mail not sent to server", errMsg);
+            }
+
+            console.log("Email send successfully", response);
+
+
+        } catch (error) {
+            console.log("Something went wrong to send the mail", error);
+            alert("Something went wrong to send the mail");
+        }
+
+        try {
+
+            const response = await fetch(`https://mailboxclient-88eb9-default-rtdb.firebaseio.com/dualEmail/${reciverCleanEmail}/inbox.json`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(sendEmailDetails),
+            })
+
+            if (!response.ok) {
+                const errMsg = await response.json();
+                throw new Error("Mail not sent to server", errMsg);
+            }
 
             console.log("Email send successfully", response);
 
