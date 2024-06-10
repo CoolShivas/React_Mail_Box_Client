@@ -105,8 +105,10 @@ const CreateMail = () => {
 
         console.log(sendEmailDetails);
 
-        // const senderEmail = localStorage.getItem("cleanEmail");
-        // const reciverCleanEmail = JSON.stringify(sentEmail.replace(/[@.]/g, ""));
+        const senderEmail = localStorage.getItem("cleanEmail");
+        console.log(senderEmail);
+        const reciverCleanEmail = JSON.stringify(sendEmail.replace(/[@.]/g, ""));
+        console.log(reciverCleanEmail);
 
     };
 
