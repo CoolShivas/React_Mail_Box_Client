@@ -56,7 +56,11 @@ const CreateMail = () => {
                 return;
             }
 
-            const res = await fetch('https://mailboxclient-88eb9-default-rtdb.firebaseio.com/shivemail.json', {
+            const cleanEmail = localStorage.getItem("cleanEmail");
+            const newCleanEmail = post.receiver.replace(/[@.]/g, "")
+            console.log(newCleanEmail);
+
+            const res = await fetch(`https://mailboxclient-88eb9-default-rtdb.firebaseio.com/shivemail/${cleanEmail}/${newCleanEmail}.json`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -69,7 +73,6 @@ const CreateMail = () => {
             console.log(error);
             alert("Something went wrong to send the mail");
         }
-
     };
 
     return (
