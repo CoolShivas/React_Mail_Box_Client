@@ -94,21 +94,40 @@ const CreateMail = () => {
         setSubjectMatter(e.target.value);
     };
 
-    const handlerOnMailFormSubmit = (e) => {
+    const handlerOnMailFormSubmit = async (e) => {
         e.preventDefault();
 
-        const sendEmailDetails = {
-            sendEmail: sendEmail,
-            subjectMatter: subjectMatter,
-            contentBox: contentBox,
-        };
+        try {
+            const sendEmailDetails = {
+                sendEmail: sendEmail,
+                subjectMatter: subjectMatter,
+                contentBox: contentBox,
+            };
 
-        console.log(sendEmailDetails);
+            console.log(sendEmailDetails);
 
-        const senderEmail = localStorage.getItem("cleanEmail");
-        console.log(senderEmail);
-        const reciverCleanEmail = JSON.stringify(sendEmail.replace(/[@.]/g, ""));
-        console.log(reciverCleanEmail);
+            const senderEmail = localStorage.getItem("cleanEmail");
+            console.log(senderEmail);
+            const reciverCleanEmail = JSON.stringify(sendEmail.replace(/[@.]/g, ""));
+            console.log(reciverCleanEmail);
+
+            const response = await fetch(`https://mailboxclient-88eb9-default-rtdb.firebaseio.com/shivaEmail/${senderEmail}/${reciverCleanEmail}.json`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(sendEmailDetails),
+            })
+
+            console.log("Email send successfully", response);
+
+
+        } catch (error) {
+            console.log("Something went wrong to send the mail", error);
+            alert("Something went wrong to send the mail");
+        }
+
+
 
     };
 
