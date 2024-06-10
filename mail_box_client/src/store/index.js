@@ -1,5 +1,19 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
+const mailSlice = createSlice({
+  name: "emails",
+  initialState: { mails: [], receiversId: null },
+  reducers: {
+    sendMails: (state, action) => {
+      state.mails = [...state.mails, action.payload];
+      state.receiversId = action.payload.receiversId;
+    },
+    settingMails: (state, action) => {
+      state.mails = action.payload;
+    },
+  },
+});
+
 const INITIAL_VALUES = {
   isAuthenticated: false,
   token: "",
@@ -27,9 +41,12 @@ const authSlice = createSlice({
 const authConfigStore = configureStore({
   reducer: {
     authen: authSlice.reducer,
+    mailing: mailSlice.reducer,
   },
 });
 
 export const authActions = authSlice.actions;
+
+export const mailActions = mailSlice.actions;
 
 export default authConfigStore;

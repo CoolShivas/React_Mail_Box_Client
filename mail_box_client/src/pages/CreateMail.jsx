@@ -51,7 +51,7 @@ const CreateMail = () => {
 
         try {
 
-            const response = await fetch(`https://mailboxclient-88eb9-default-rtdb.firebaseio.com/dualEmail/${senderEmail}/sendBox.json`, {
+            const response = await fetch(`https://mailboxclient-88eb9-default-rtdb.firebaseio.com/electronicMaiL/${senderEmail}/sendBox.json`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -65,6 +65,12 @@ const CreateMail = () => {
             }
 
             console.log("Email send successfully", response);
+            const data = await response.json();
+
+            dispatch(mailActions.sendMails({
+                mails: data,
+                receiversId: sendEmail
+            }));
 
 
         } catch (error) {
@@ -74,7 +80,7 @@ const CreateMail = () => {
 
         try {
 
-            const response = await fetch(`https://mailboxclient-88eb9-default-rtdb.firebaseio.com/dualEmail/${reciverCleanEmail}/inbox.json`, {
+            const response = await fetch(`https://mailboxclient-88eb9-default-rtdb.firebaseio.com/electronicMaiL/${reciverCleanEmail}/inbox.json`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -88,6 +94,12 @@ const CreateMail = () => {
             }
 
             console.log("Email send successfully", response);
+            const data = await response.json();
+
+            dispatch(mailActions.sendMails({
+                mails: data,
+                receiversId: sendEmail
+            }));
 
 
         } catch (error) {
