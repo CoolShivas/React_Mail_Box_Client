@@ -9,7 +9,7 @@ const CreateMail = () => {
 
     const editor = useRef(null);
 
-    const [content, setContent] = useState('');
+    // const [content, setContent] = useState('');
 
     const navigate = useHistory();
 
@@ -17,11 +17,52 @@ const CreateMail = () => {
         navigate.push("/welcome");
     };
 
+
+    const [post, setPost] = useState({
+        receiver: '',
+        subject: '',
+    });
+
+    const fieldChangeHandler = (e) => {
+        setPost({
+            ...post, [e.target.id]: e.target.value
+        })
+    };
+
+    const contentFieldHandler = (data) => {
+        setPost({
+            ...post,
+            "content": data
+        })
+    };
+
+    const handlerOnMailFormSubmit = (e) => {
+        e.preventDefault();
+        console.log(post);
+
+        if (post.receiver.trim() === "") {
+            alert("Email is required");
+            return;
+        }
+
+        if (post.subject.trim() === "") {
+            alert("Text Mail is required");
+            return;
+        }
+
+        if (post.content.trim() === "") {
+            alert("Content message is required");
+            return;
+        }
+
+
+    };
+
     return (
-        <>
+        <form onSubmit={handlerOnMailFormSubmit}>
             <div className={styles.create_mail__container}>
                 <div className="create_mail__div">
-
+                    {JSON.stringify(post)}
                     <div className={styles.header_right}>
                         <button onClick={handlerOnCancelBtn}> X </button>
                     </div>
@@ -31,12 +72,20 @@ const CreateMail = () => {
                         <div className={styles.header_left}>
                             <div className={styles.emailto}>
 
-                                <input type="email" placeholder="To :" />
+                                <input type="email"
+                                    placeholder="To :"
+                                    id="receiver"
+                                    onChange={fieldChangeHandler}
+                                />
 
                             </div>
 
                             <div className={styles.emailto}>
-                                <input type="text" placeholder="Text Mail" />
+                                <input type="text"
+                                    placeholder="Text Mail"
+                                    id="subject"
+                                    onChange={fieldChangeHandler}
+                                />
                             </div>
 
                             <div className={styles.emailto}>
@@ -44,20 +93,21 @@ const CreateMail = () => {
 
                                 <JoditEditor
                                     ref={editor}
-                                    value={content}
-                                    onChange={newContent => setContent(newContent)}
+                                    value={post.content}
+                                    // onChange={newContent => setContent(newContent)}
+                                    onChange={newContent => contentFieldHandler(newContent)}
                                 ></JoditEditor>
 
                             </div>
                         </div>
                         <div className={styles.mail_send__btn}>
-                            <button className="btn btn-info"> Send </button>
+                            <button className="btn btn-info" type="submit"> Send </button>
                         </div>
 
                     </div>
                 </div>
             </div>
-        </>
+        </form>
     )
 }
 
