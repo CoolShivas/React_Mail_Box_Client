@@ -1,4 +1,6 @@
-import JoditEditor from "jodit-react";
+import "react-quill/dist/quill.snow.css";
+import ReactQuill from "react-quill";
+// import JoditEditor from "jodit-react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import styles from "./CreateMail.module.css";
 import { useRef, useState } from "react";
@@ -7,7 +9,7 @@ import { useRef, useState } from "react";
 
 const CreateMail = () => {
 
-    const editor = useRef(null);
+    // const editor = useRef(null);
 
     // const [content, setContent] = useState('');
 
@@ -18,62 +20,96 @@ const CreateMail = () => {
     };
 
 
-    const [post, setPost] = useState({
-        receiver: '',
-        subject: '',
-    });
+    // const [post, setPost] = useState({
+    //     receiver: '',
+    //     subject: '',
+    // });
 
-    const fieldChangeHandler = (e) => {
-        setPost({
-            ...post, [e.target.id]: e.target.value
-        })
+    // const fieldChangeHandler = (e) => {
+    //     setPost({
+    //         ...post, [e.target.id]: e.target.value
+    //     })
+    // };
+
+    // const contentFieldHandler = (data) => {
+    //     setPost({
+    //         ...post,
+    //         "content": data
+    //     })
+    // };
+
+    // const handlerOnMailFormSubmit = async (e) => {
+    //     e.preventDefault();
+    //     console.log(post);
+
+    // try {
+    //     if (post.receiver.trim() === "") {
+    //         alert("Email is required");
+    //         return;
+    //     }
+
+    //     if (post.subject.trim() === "") {
+    //         alert("Text Mail is required");
+    //         return;
+    //     }
+
+    //     if (post.content.trim() === "") {
+    //         alert("Content message is required");
+    //         return;
+    //     }
+
+    //     const cleanEmail = localStorage.getItem("cleanEmail");
+    //     const newCleanEmail = post.receiver.replace(/[@.]/g, "")
+    //     console.log(newCleanEmail);
+
+    //     const res = await fetch(`https://mailboxclient-88eb9-default-rtdb.firebaseio.com/shivemail/${cleanEmail}/${newCleanEmail}.json`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(post),
+    //     })
+    //     console.log('Sent Successfully', res);
+
+    // } catch (error) {
+    //     console.log(error);
+    //     alert("Something went wrong to send the mail");
+    // }
+    // };
+
+
+    // Once again started using the rich editor with the help of ReactQuill whereas above one was completed with the help of JoditEditor ;
+
+
+    const [sendEmail, setSendEmail] = useState("");
+    const [subjectMatter, setSubjectMatter] = useState("");
+    const [contentBox, setContentBox] = useState("");
+
+
+    const handlerOnSendEmail = (e) => {
+        setSendEmail(e.target.value);
     };
 
-    const contentFieldHandler = (data) => {
-        setPost({
-            ...post,
-            "content": data
-        })
+    const handlerOnSubjectMatter = (e) => {
+        setSubjectMatter(e.target.value);
     };
 
-    const handlerOnMailFormSubmit = async (e) => {
+    const handlerOnMailFormSubmit = (e) => {
         e.preventDefault();
-        console.log(post);
 
-        try {
-            if (post.receiver.trim() === "") {
-                alert("Email is required");
-                return;
-            }
+        const sendEmailDetails = {
+            sendEmail: sendEmail,
+            subjectMatter: subjectMatter,
+            contentBox: contentBox,
+        };
 
-            if (post.subject.trim() === "") {
-                alert("Text Mail is required");
-                return;
-            }
+        console.log(sendEmailDetails);
 
-            if (post.content.trim() === "") {
-                alert("Content message is required");
-                return;
-            }
+        // const senderEmail = localStorage.getItem("cleanEmail");
+        // const reciverCleanEmail = JSON.stringify(sentEmail.replace(/[@.]/g, ""));
 
-            const cleanEmail = localStorage.getItem("cleanEmail");
-            const newCleanEmail = post.receiver.replace(/[@.]/g, "")
-            console.log(newCleanEmail);
-
-            const res = await fetch(`https://mailboxclient-88eb9-default-rtdb.firebaseio.com/shivemail/${cleanEmail}/${newCleanEmail}.json`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(post),
-            })
-            console.log('Sent Successfully', res);
-
-        } catch (error) {
-            console.log(error);
-            alert("Something went wrong to send the mail");
-        }
     };
+
 
     return (
         <form onSubmit={handlerOnMailFormSubmit}>
@@ -92,28 +128,35 @@ const CreateMail = () => {
                                 <input type="email"
                                     placeholder="To :"
                                     id="receiver"
-                                    onChange={fieldChangeHandler}
+                                    // onChange={fieldChangeHandler}
+                                    value={sendEmail}
+                                    onChange={handlerOnSendEmail}
                                 />
 
                             </div>
 
                             <div className={styles.emailto}>
-                                <input type="text"
+                                <input
+                                    type="text"
                                     placeholder="Text Mail"
                                     id="subject"
-                                    onChange={fieldChangeHandler}
+                                    // onChange={fieldChangeHandler}
+                                    value={subjectMatter}
+                                    onChange={handlerOnSubjectMatter}
                                 />
                             </div>
 
                             <div className={styles.emailto}>
                                 {/* <textarea name="text" id="text" rows={10} cols={20} placeholder="This is a text box"></textarea> */}
 
-                                <JoditEditor
+                                {/* <JoditEditor
                                     ref={editor}
                                     value={post.content}
                                     // onChange={newContent => setContent(newContent)}
                                     onChange={newContent => contentFieldHandler(newContent)}
-                                ></JoditEditor>
+                                ></JoditEditor> */}
+
+                                <ReactQuill value={contentBox} onChange={setContentBox} id="editor" />
 
                             </div>
                         </div>
