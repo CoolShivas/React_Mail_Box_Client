@@ -3,6 +3,8 @@ import styles from "./InboxPage.module.css";
 
 const InboxPage = () => {
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const cleanEmail = localStorage.getItem("cleanEmail");
     console.log(cleanEmail);
     // Getting the cleanEmail i.e, stored in localStorage ;
@@ -12,7 +14,7 @@ const InboxPage = () => {
 
     useEffect(() => {
         const fetchInboxEmailFromServer = async () => {
-
+            setIsLoading(true);
             try {
 
                 const response = await fetch(
@@ -34,8 +36,10 @@ const InboxPage = () => {
                         ...data[key],
                     })
                 }
+                setIsLoading(false);
                 console.log(loadServerEmail);
-                setSentMails(loadServerEmail)
+                setSentMails(loadServerEmail);
+
 
             } catch (error) {
                 console.log("Something went wrong inbox emails", error);
@@ -53,16 +57,19 @@ const InboxPage = () => {
                     <h1> Welcome to the inbox </h1>
                 </div>
                 <div className={styles.inbox_messages}>
-                    <ul>
-                        {/* {console.log(sentMails)} */}
-                        {sentMails.map((arr) => {
-                            return <li key={arr.id}>
-                                <p> From: {arr.sendEmail} </p>
-                                <p> Subject: {arr.subjectMatter} </p>
-                                <p> Content: {arr.contentBox} </p>
-                            </li>
-                        })}
-                    </ul>
+                    {isLoading ?
+                        (<p className={styles.loading}> Loading... </p>) : sentMails.length === 0 ? (
+                            <p className={styles.empty_inbox}> Inbox is empty </p>
+                        ) : (<ul>
+                            {sentMails.map((arr) => {
+                                return <li key={arr.id}>
+                                    <p> From: {arr.sendEmail} </p>
+                                    <p> Subject: {arr.subjectMatter} </p>
+                                    <p> Content: {arr.contentBox} </p>
+                                </li>
+                            })}
+                        </ul>)}
+
                 </div>
             </div>
         </div>
