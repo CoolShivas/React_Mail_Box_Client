@@ -26,6 +26,16 @@ const InboxPage = () => {
                 const data = await response.json();
                 console.log(data); // Getting the data;
 
+                const loadServerEmail = [];
+
+                for (const key in data) {
+                    loadServerEmail.push({
+                        id: key,
+                        ...data[key],
+                    })
+                }
+                console.log(loadServerEmail);
+                setSentMails(loadServerEmail)
 
             } catch (error) {
                 console.log("Something went wrong inbox emails", error);
@@ -44,17 +54,7 @@ const InboxPage = () => {
                 </div>
                 <div className={styles.inbox_messages}>
                     <ul>
-                        <li>
-                            <h2>Hello World
-                            </h2>
-                            <p> Where are you bro ?</p>
-                        </li>
-
-                        <li>
-                            <h2>Hello World
-                            </h2>
-                            <p> Where are you bro ?</p>
-                        </li>
+                        {console.log(sentMails)}
                     </ul>
                 </div>
             </div>
