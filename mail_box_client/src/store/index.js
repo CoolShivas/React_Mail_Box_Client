@@ -28,7 +28,6 @@ const authSlice = createSlice({
       state.isAuthenticated = true;
       state.token = action.payload.token;
       state.userId = action.payload.userId;
-      console.log(state.userId, state.token);
     },
     logout(state, action) {
       state.isAuthenticated = false;

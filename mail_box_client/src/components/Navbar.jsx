@@ -38,6 +38,12 @@ const Navbar = () => {
                     </li>
 
                     <li>
+                        <NavLink to="/inbox" className={styles.navlink}>
+                            inbox
+                        </NavLink>
+                    </li>
+
+                    <li>
                         <NavLink to="/signup" className={styles.navlink}>
                             <button onClick={handlerOnLogout}> Logout </button>
                         </NavLink>

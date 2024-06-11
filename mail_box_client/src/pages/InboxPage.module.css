@@ -1,0 +1,36 @@
+.inbox_container {
+  /* background-color: orange; */
+  width: 100%;
+}
+
+.inbox_div {
+  background-color: lightsalmon;
+  padding: 1rem;
+  margin: 25px;
+}
+
+.inbox_heading {
+  padding: 1rem;
+}
+
+.inbox_messages {
+  background-color: lightyellow;
+  width: 80%;
+  margin: 2rem auto;
+  border-bottom: 10px;
+
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
+
+  && ul {
+    && li {
+      list-style: none;
+      font-size: 20px;
+      font-weight: 500;
+      border-bottom: 2px solid blue;
+    }
+  }
+}
