@@ -54,7 +54,14 @@ const InboxPage = () => {
                 </div>
                 <div className={styles.inbox_messages}>
                     <ul>
-                        {console.log(sentMails)}
+                        {/* {console.log(sentMails)} */}
+                        {sentMails.map((arr) => {
+                            return <li key={arr.id}>
+                                <p> From: {arr.sendEmail} </p>
+                                <p> Subject: {arr.subjectMatter} </p>
+                                <p> Content: {arr.contentBox} </p>
+                            </li>
+                        })}
                     </ul>
                 </div>
             </div>
