@@ -44,6 +44,12 @@ const Navbar = () => {
                     </li>
 
                     <li>
+                        <NavLink to="/sentbox" className={styles.navlink}>
+                            sent
+                        </NavLink>
+                    </li>
+
+                    <li>
                         <NavLink to="/signup" className={styles.navlink}>
                             <button onClick={handlerOnLogout}> Logout </button>
                         </NavLink>

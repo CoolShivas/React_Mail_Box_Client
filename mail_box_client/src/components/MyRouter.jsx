@@ -1,3 +1,4 @@
+import SentBoxPage from "../pages/SentBoxPage";
 import InboxPage from "../pages/InboxPage";
 import CreateMail from "../pages/CreateMail";
 import Header from "./Header";
@@ -20,6 +21,7 @@ const MyRouter = () => {
                 <Route path="/welcome"> <WelComePage></WelComePage> </Route>
                 <Route path="/mail"> <CreateMail></CreateMail> </Route>
                 <Route path="/inbox"> <InboxPage></InboxPage> </Route>
+                <Route path="/sentbox"> <SentBoxPage></SentBoxPage> </Route>
             </>}
 
             {!isAuthenticated && <>

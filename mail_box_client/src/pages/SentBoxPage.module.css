@@ -1,0 +1,19 @@
+.sentbox_container {
+  width: 100%;
+  /* background-color: orange; */
+  margin: 5rem auto;
+}
+.sentbox_heading {
+  text-align: center;
+  background-color: salmon;
+}
+.sentbox_content {
+  width: 80%;
+  background-color: red;
+  margin: 5rem auto;
+  && ul {
+    && li {
+      list-style: none;
+    }
+  }
+}
