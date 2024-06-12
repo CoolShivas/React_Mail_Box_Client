@@ -27,6 +27,18 @@ const SentBoxPage = () => {
                 const data = await response.json();
                 console.log(data); // Getting the data from sendBox;
 
+                const loadedSendEmail = [];
+
+                for (const key in data) {
+                    loadedSendEmail.push({
+                        id: key,
+                        ...data[key]
+                    });
+                };
+
+                console.log(loadedSendEmail);
+                setSentMails(loadedSendEmail);
+
 
             } catch (error) {
                 console.log("Something went wrong sendBox emails", error);
@@ -46,11 +58,13 @@ const SentBoxPage = () => {
                 </div>
 
                 <div className={styles.sentbox_content}>
-                    <ul>
-                        <li>
-                            Sent Content
+                    {sentMails.map((brr) => {
+                        return <li key={brr.id}>
+                            <p> To: {brr.sendEmail} </p>
+                            <p> Text Mail: {brr.subjectMatter} </p>
+                            <p> Content: {brr.contentBox} </p>
                         </li>
-                    </ul>
+                    })}
                 </div>
             </div>
         </>
