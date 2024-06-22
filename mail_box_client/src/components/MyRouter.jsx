@@ -17,9 +17,7 @@ const MyRouter = () => {
 
             <Route path="/"> <Header></Header> </Route>
             {isAuthenticated && <>
-
-                <Route path="/welcome"> <WelComePage></WelComePage> </Route>
-                <Route path="/mail"> <CreateMail></CreateMail> </Route>
+                <Route path="/compose"> <CreateMail></CreateMail> </Route>
                 <Route path="/inbox"> <InboxPage></InboxPage> </Route>
                 <Route path="/sentbox"> <SentBoxPage></SentBoxPage> </Route>
             </>}

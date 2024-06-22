@@ -25,15 +25,10 @@ const Navbar = () => {
             <ul>
 
                 {isAuthenticated && <>
-                    <li>
-                        <NavLink to="/welcome" className={styles.navlink}>
-                            home
-                        </NavLink>
-                    </li>
 
                     <li>
-                        <NavLink to="/mail" className={styles.navlink}>
-                            mail
+                        <NavLink to="/compose" className={styles.navlink}>
+                            compose
                         </NavLink>
                     </li>
 
